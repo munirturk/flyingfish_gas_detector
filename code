@@ -1,0 +1,30 @@
+//defines the led and the sensor
+int red = 12;     
+int green = 11;
+int gasA0 = A5;
+int threshold = 400; //threshold value
+
+void setup() {
+  pinMode(red, OUTPUT);     //sets the red led as output
+  pinMode(green, OUTPUT);   //sets the green led as output
+  pinMode(gasA0, INPUT);    //sets the gas sensor as input
+  Serial.begin(9600);//sets the baud rate
+}
+
+void loop() {
+  int analogSensor = analogRead(gasA0);   //reads the data from the sensor
+  // checks if it has reached the threshold value
+  if (analogSensor > threshold)
+  {
+    digitalWrite(red, HIGH);
+    digitalWrite(green, LOW);
+  }
+  else    //if analog < threshold, normal condition
+  {
+    digitalWrite(red, LOW);
+    digitalWrite(green, HIGH);
+  }
+  delay(100); //delay of 100 microseconds
+   Serial.println(analogSensor);
+ 
+}
